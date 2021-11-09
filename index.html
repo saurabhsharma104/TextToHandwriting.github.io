@@ -5,17 +5,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
     <title>TextExpert</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="" />
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+
     <!--Replace with your tailwind.css once created-->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet" />
     <!-- Define your gradient here - use online tools to find a gradient matching your branding-->
     <style>
         .gradient {
             background: linear-gradient(90deg, #b2f862 0%, #f5d89a 100%);
+        }
+        
+        .modal {
+            transition: opacity 0.25s ease;
+        }
+        
+        body.modal-active {
+            overflow-x: hidden;
+            overflow-y: visible !important;
         }
     </style>
 </head>
@@ -103,7 +115,7 @@
                 <div class="w-5/6 sm:w-1/2 p-6">
 
                     <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-                            TEXT TO HANDWRITING
+                        TEXT TO HANDWRITING
                     </h3>
                     <p class="text-gray-600 mb-8">
                         Enjoy with converting simple text into handwriting and download handwriting file into pdf format.
@@ -192,39 +204,111 @@
             <div class="h-1 mx-auto bg-white w-1/6 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
         <h3 class="my-4 text-3xl leading-tight">Have Any Query Contact Us!</h3>
-        <a href="template/contactUs.html">
-            <button class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"> Contact Us </button>
-        </a>
+        <div class="flex items-center justify-center h-full">
+            <button class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700" onclick="toggleModal()">Contact Us!</button>
+        </div>
+        <div class="fixed z-10 overflow-y-auto top-0 w-full left-0 hidden" id="modal">
+            <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 transition-opacity">
+                    <div class="absolute inset-0 bg-gray-900 opacity-75" />
+                </div>
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+
+                <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                    <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+
+                        <input type=hidden name="oid" value="00D5j000001tu0z">
+                        <input type=hidden name="retURL" value="https://apisero.com/">
+                        
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="first_name">
+                                First Name
+                            </label> <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="first_name"  maxlength="40" name="first_name" size="20" type="text"/>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="last_name">
+                                Last Name
+                            </label> <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="last_name" maxlength="80" name="last_name" size="20" type="text" />
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="company" >
+                                Company
+                            </label><input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="company" maxlength="40" name="company" size="20" type="text"/>
+                                <label class="block text-gray-700 text-sm font-bold mb-2 " for="phone">
+                                Phone Number</label>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" maxlength="40" name="phone" size="20" type="text"/>
+
+                                <!-- Required form plugin -->
+                                <link href="https://cdn.jsdelivr.net/npm/@tailwindcss/custom-forms@0.2.1/dist/custom-forms.css" rel="stylesheet" />
+
+                                <!-- <label class="block text-left" style="max-width: 400px">
+                        <span class="text-gray-700">Lead Source</span>
+                        <select class="form-select block w-full mt-1 text-blue-900" id="lead_source" name="lead_source">
+                            <option value="">--None--</option><option value="Web">Web</option>
+                            <option value="Phone Inquiry">Phone Inquiry</option>
+                            <option value="Partner Referral">Partner Referral</option>
+                            <option value="Purchased List">Purchased List</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        </label> -->
+                
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="lead_source">Lead Source</label>
+                            <select class="form-select block w-full mt-1 text-blue-900" id="lead_source" name="lead_source">
+                                <option value="">--None--</option>
+                                <option value="Web">Web</option>
+                                <option value="Phone Inquiry">Phone Inquiry</option>
+                                <option value="Partner Referral">Partner Referral</option>
+                                <option value="Purchased List">Purchased List</option>
+                                <option value="Other">Other</option>
+                            </select><br>
+                        
+        
+                        </div>
+                        
+                        <div class="bg-gray-200 px-4 py-3 text-right ">
+                            <button type="button " class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2 " onclick="toggleModal() "><i class="fas fa-times "></i> Cancel</button>
+                            <!-- <button type="button " id=" " class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2 ">Submit</button> -->
+                            <input type="submit" name="submit" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2 ">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            function toggleModal() {
+                document.getElementById('modal').classList.toggle('hidden')
+            }
+        </script>
+
     </section>
+
     <!--Footer-->
-    <footer class="bg-white">
-        <div class="container mx-auto px-8">
-            <div class="w-full flex flex-col md:flex-row py-6">
-                <div class="flex-1">
-                    <h3 class="uppercase text-gray-600 md:mb-6">Social</h3>
-                    <ul class="list-reset mb-6">
-                        <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                            <a href="https://www.facebook.com/people/Shaurya-Sharma/100024128522407" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Facebook</a>
+    <footer class="bg-white ">
+        <div class="container mx-auto px-8 ">
+            <div class="w-full flex flex-col md:flex-row py-6 ">
+                <div class="flex-1 ">
+                    <h3 class="uppercase text-gray-600 md:mb-6 ">Social</h3>
+                    <ul class="list-reset mb-6 ">
+                        <li class="mt-2 inline-block mr-2 md:block md:mr-0 ">
+                            <a href="https://www.facebook.com/people/Shaurya-Sharma/100024128522407 " class="no-underline hover:underline text-gray-800 hover:text-pink-500 ">Facebook</a>
                         </li>
-                        <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                            <a href="https://linkedin.com/in/saurabh-sharma-786211193" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Linkedin</a>
+                        <li class="mt-2 inline-block mr-2 md:block md:mr-0 ">
+                            <a href="https://linkedin.com/in/saurabh-sharma-786211193 " class="no-underline hover:underline text-gray-800 hover:text-pink-500 ">Linkedin</a>
                         </li>
-                        <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                            <a href="https://twitter.com/Saurabh52494458" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Twitter</a>
+                        <li class="mt-2 inline-block mr-2 md:block md:mr-0 ">
+                            <a href="https://twitter.com/Saurabh52494458 " class="no-underline hover:underline text-gray-800 hover:text-pink-500 ">Twitter</a>
                         </li>
                     </ul>
                 </div>
-                <div class="flex-1">
-                    <h3 class="uppercase text-gray-600 md:mb-6">Company</h3>
-                    <ul class="list-reset mb-6">
-                        <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                            <a href="https://mysaurabhfriend.blogspot.com/" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Official Blog</a>
+                <div class="flex-1 ">
+                    <h3 class="uppercase text-gray-600 md:mb-6 ">Company</h3>
+                    <ul class="list-reset mb-6 ">
+                        <li class="mt-2 inline-block mr-2 md:block md:mr-0 ">
+                            <a href="https://mysaurabhfriend.blogspot.com/ " class="no-underline hover:underline text-gray-800 hover:text-pink-500 ">Official Blog</a>
                         </li>
-                        <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                            <a href="#" class="no-underline hover:underline text-gray-800 hover:text-pink-500">About Us</a>
+                        <li class="mt-2 inline-block mr-2 md:block md:mr-0 ">
+                            <a href="# " class="no-underline hover:underline text-gray-800 hover:text-pink-500 ">About Us</a>
                         </li>
-                        <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                            <a href="https://linkedin.com/in/saurabh-sharma-786211193" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Contact</a>
+                        <li class="mt-2 inline-block mr-2 md:block md:mr-0 ">
+                            <a href="https://linkedin.com/in/saurabh-sharma-786211193 " class="no-underline hover:underline text-gray-800 hover:text-pink-500 ">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -232,49 +316,49 @@
         </div>
     </footer>
     <!-- jQuery if you need it
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js "></script>
   -->
     <script>
         var scrollpos = window.scrollY;
-        var header = document.getElementById("header");
-        var navcontent = document.getElementById("nav-content");
-        var navaction = document.getElementById("navAction");
-        var brandname = document.getElementById("brandname");
-        var toToggle = document.querySelectorAll(".toggleColour");
+        var header = document.getElementById("header ");
+        var navcontent = document.getElementById("nav-content ");
+        var navaction = document.getElementById("navAction ");
+        var brandname = document.getElementById("brandname ");
+        var toToggle = document.querySelectorAll(".toggleColour ");
 
-        document.addEventListener("scroll", function() {
+        document.addEventListener("scroll ", function() {
             /*Apply classes for slide in bar*/
             scrollpos = window.scrollY;
 
             if (scrollpos > 10) {
-                header.classList.add("bg-white");
-                navaction.classList.remove("bg-white");
-                navaction.classList.add("gradient");
-                navaction.classList.remove("text-gray-800");
-                navaction.classList.add("text-white");
+                header.classList.add("bg-white ");
+                navaction.classList.remove("bg-white ");
+                navaction.classList.add("gradient ");
+                navaction.classList.remove("text-gray-800 ");
+                navaction.classList.add("text-white ");
                 //Use to switch toggleColour colours
                 for (var i = 0; i < toToggle.length; i++) {
-                    toToggle[i].classList.add("text-gray-800");
-                    toToggle[i].classList.remove("text-white");
+                    toToggle[i].classList.add("text-gray-800 ");
+                    toToggle[i].classList.remove("text-white ");
                 }
-                header.classList.add("shadow");
-                navcontent.classList.remove("bg-gray-100");
-                navcontent.classList.add("bg-white");
+                header.classList.add("shadow ");
+                navcontent.classList.remove("bg-gray-100 ");
+                navcontent.classList.add("bg-white ");
             } else {
-                header.classList.remove("bg-white");
-                navaction.classList.remove("gradient");
-                navaction.classList.add("bg-white");
-                navaction.classList.remove("text-white");
-                navaction.classList.add("text-gray-800");
+                header.classList.remove("bg-white ");
+                navaction.classList.remove("gradient ");
+                navaction.classList.add("bg-white ");
+                navaction.classList.remove("text-white ");
+                navaction.classList.add("text-gray-800 ");
                 //Use to switch toggleColour colours
                 for (var i = 0; i < toToggle.length; i++) {
-                    toToggle[i].classList.add("text-white");
-                    toToggle[i].classList.remove("text-gray-800");
+                    toToggle[i].classList.add("text-white ");
+                    toToggle[i].classList.remove("text-gray-800 ");
                 }
 
-                header.classList.remove("shadow");
-                navcontent.classList.remove("bg-white");
-                navcontent.classList.add("bg-gray-100");
+                header.classList.remove("shadow ");
+                navcontent.classList.remove("bg-white ");
+                navcontent.classList.add("bg-gray-100 ");
             }
         });
     </script>
@@ -282,8 +366,8 @@
         /*Toggle dropdown list*/
         /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
 
-        var navMenuDiv = document.getElementById("nav-content");
-        var navMenu = document.getElementById("nav-toggle");
+        var navMenuDiv = document.getElementById("nav-content ");
+        var navMenu = document.getElementById("nav-toggle ");
 
         document.onclick = check;
 
@@ -295,14 +379,14 @@
                 // click NOT on the menu
                 if (checkParent(target, navMenu)) {
                     // click on the link
-                    if (navMenuDiv.classList.contains("hidden")) {
-                        navMenuDiv.classList.remove("hidden");
+                    if (navMenuDiv.classList.contains("hidden ")) {
+                        navMenuDiv.classList.remove("hidden ");
                     } else {
-                        navMenuDiv.classList.add("hidden");
+                        navMenuDiv.classList.add("hidden ");
                     }
                 } else {
                     // click both outside link and outside menu, hide menu
-                    navMenuDiv.classList.add("hidden");
+                    navMenuDiv.classList.add("hidden ");
                 }
             }
         }
